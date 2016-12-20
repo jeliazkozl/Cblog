@@ -1,0 +1,41 @@
+﻿@model Blog.Models.Article
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container">
+    <article>
+        <header>
+            <h2>
+                @Model.Title
+            </h2>
+        </header>
+        <p>
+            @Model.Content
+        </p>
+        <small class="author">
+            Author: @Model.Author.FullName
+        </small>
+        <br />
+        <br />
+        <footer>
+            <div class="container">
+                <div class="col-sm-8">
+                    @Html.ActionLink("Comment", "Index", "Article", null, new { @class = "btn btn-primary btn-xs" })
+                </div>
+                <div class="col-sm-4 pull-right">
+                    @if (User.IsInRole("Admin") || Model.IsAuthor(User.Identity.Name))
+                    {
+                        @Html.ActionLink("Edit", "Edit", "Article", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs" })
+                        @Html.Raw("&nbsp;&nbsp;&nbsp;")
+                        @Html.ActionLink("Delete", "Delete", "Article", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs" })
+                    }
+                    @Html.Raw("&nbsp;&nbsp;&nbsp;")
+                    @Html.ActionLink("Back", "Index", "Article", null, new { @class = "btn btn-default btn-xs" })
+                </div>
+                </div>
+        </footer>
+    </article>
+</div>
+<hr />

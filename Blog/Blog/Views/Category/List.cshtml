@@ -1,0 +1,46 @@
+﻿@model List<Blog.Models.Category>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="container">
+    <div class="well">
+        <h2>All Categories</h2>
+        <div class="row">
+            <table class="table table-striped table-hover col-sm-12">
+                
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var category in Model)
+                    {
+                        <tr>
+                            <td>@category.Id</td>
+                            <td>@category.Name</td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "Category", new { @id = category.Id }, null)
+                                @Html.Raw("&nbsp;&nbsp;&nbsp;")
+                                @Html.ActionLink("Delete", "Delete", "Category", new { @id = category.Id }, null)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+                <tfoot>
+                    @Html.Raw("&nbsp;&nbsp;&nbsp;")
+                    @Html.ActionLink("Back", "Index", "Article", null, new { @class = "btn btn-default" })
+                    @Html.Raw("&nbsp;&nbsp;&nbsp;")
+                    @Html.ActionLink("Create", "Create", "Category", null, new { @class = "btn btn-warning" })
+                </tfoot>
+
+            </table>
+        </div>
+    </div>
+</div>
